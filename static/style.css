@@ -1,0 +1,29 @@
+body {
+    background-image: url("bg.jpg");
+    background-repeat: repeat;
+    background-size: 100%;
+}
+
+.header {
+    display: flex;
+    background-image: url("qmarkbg.png");
+    opacity: 0.75;
+    height: 15vh;
+}
+
+.header h1 {
+    margin: auto;
+    align-self: center;
+}
+
+.main-section {
+    height: 100vh;
+    background-color: white;
+    opacity: 0.75;
+}
+
+.footer {
+    display: flex;
+    background-image: url("qmarkbg.png");
+    opacity: 0.75;
+}
