@@ -1,4 +1,35 @@
-{% extends 'base.html' %} 
-{% block content %}
+<!--This file uses base.html as a template and all additional content should go between the block and end content tags below-->
+{% extends 'base.html' %} {% block content %}
+
+<h3 class="text-centered">Welcome</h3>
+
+<form class="text-centered">
+    <!--Input form for username-->
+    <div class="form-group">
+        <label for="username">Please enter a username:</label>
+        <input type="text" id="username"></input><br>
+        <button type="submit" class="btn btn-success">Play</button>
+    </div>
+</form>
+
+<hr class="featurette-divider">
+
+<section class="container">
+    <!--Game Instuctions-->
+    <div class="row">
+        <div class="col-xs-6 instructions">
+            <p>Welcome to Riddle me THIS! You are about to be asked twenty lateral thinking questions. You have as many chances as you like to answer each question with a one-word answer. Enter your username above and click Play to continue.</p>
+        </div>
+    </div>
+</section>
+
+<hr class="featurette-divider">
+
+<aside class="text-centered">
+    <!--High score table to go here-->
+    <h4>High Scores</h4>
+    <table>
+    </table>
+</aside>
 
 {% endblock %}

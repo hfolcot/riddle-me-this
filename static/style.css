@@ -20,6 +20,7 @@ body {
     height: 100vh;
     background-color: white;
     opacity: 0.75;
+    padding-top: 25px;
 }
 
 .footer {
@@ -27,3 +28,12 @@ body {
     background-image: url("qmarkbg.png");
     opacity: 0.75;
 }
+
+.text-centered {
+    text-align: center;
+}
+
+.instructions {
+    margin-left: 25%;
+    margin-right: 25%;
+    }
