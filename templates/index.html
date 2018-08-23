@@ -3,12 +3,17 @@
 
 <h3 class="text-centered">Welcome</h3>
 
-<form class="text-centered">
+<form class="text-centered" method="POST">
     <!--Input form for username-->
     <div class="form-group">
         <label for="username">Please enter a username:</label>
-        <input type="text" id="username"></input><br>
+        <input type="text" id="username" name="username"></input><br>
         <button type="submit" class="btn btn-success">Play</button>
+    </div>
+    <div>
+        {% if error %}
+        <p class="error"><strong>Error: {{ error }}</strong></p>
+        {% endif %}
     </div>
 </form>
 
