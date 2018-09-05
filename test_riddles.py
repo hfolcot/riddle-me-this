@@ -1,4 +1,4 @@
-import unittest, riddles_temp, json
+import unittest, run, json
 
 
 class TestRiddles(unittest.TestCase):
@@ -10,5 +10,15 @@ class TestRiddles(unittest.TestCase):
         """
         Test to ensure the riddles are loaded
         """
-        riddles_temp.get_all_riddles("data/riddles.json")
+        run.get_all_riddles("data/riddles.json")
         self.assertGreater(len("all_riddles"), 0)
+
+    def test_get_next_riddle(self):
+        """ 
+        Test to ensure the current riddle is returned
+        """
+        riddle_count=2
+        all_riddles = run.get_all_riddles("data/riddles.json")
+        riddle = run.get_next_riddle(all_riddles, riddle_count)
+        self.assertEqual(riddle["question"], "What has a head, a tail, is brown, and has no legs?")
+        self.assertEqual(riddle["answer"], "penny")

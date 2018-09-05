@@ -1,0 +1,19 @@
+<!--This file uses base.html as a template and all additional content should go between the block and end content tags below-->
+{% extends 'base.html' %} {% block content %}
+<div class="question text-centered">
+    <p>{{ question }}</p>
+</div>
+
+<form class="text-centered" method="POST">
+    <div class="form-group">
+        <label for="answer">Answer:</label>
+        <input type="text" id="answer" name="answer"></input><br>
+        <button type="submit" class="btn btn-success">Go!</button>
+    </div>
+</form>
+<div>
+    {% if error %}
+    <p>{{ error }}</p>
+    {% endif %}
+</div>
+{% endblock %}
