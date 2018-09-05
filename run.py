@@ -24,6 +24,11 @@ def get_next_riddle(riddles, riddle_count):
     count = str(riddle_count)
     riddle = riddles[count]
     return riddle
+    
+def reset_game():
+    global riddle_count
+    riddle_count = 1
+    return riddle_count
 
 @app.route("/", methods=["GET", "POST"])
 #Welcome page containing username entry, instructions and current high scores
@@ -47,13 +52,13 @@ def index():
 #The page where the game will be played
 def game():
     global riddle_count
-    if riddle_count > 20:
+    if riddle_count > 3:
         return redirect("/endgame")
     all_riddles = get_all_riddles("data/riddles.json")
     riddle = get_next_riddle(all_riddles, riddle_count)
     question = riddle["question"]
     answer = riddle["answer"]
-     # Handle POST request
+    # Handle POST request
     if request.method == "POST":
         if request.form["answer"] == answer:
             riddle_count += 1
@@ -65,9 +70,14 @@ def game():
 
     return render_template("game.html", question=question)
     
-@app.route("/endgame")
+@app.route("/endgame", methods=["GET", "POST"])
 #See the high scores and get a chance to play again
-
+def endgame():
+    # Handle POST request
+    if request.method == "POST":
+        reset_game()
+        return redirect("/game")
+    return render_template("endgame.html")
 
 
 if __name__ == '__main__':       

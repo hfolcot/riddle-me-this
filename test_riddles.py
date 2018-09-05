@@ -22,3 +22,11 @@ class TestRiddles(unittest.TestCase):
         riddle = run.get_next_riddle(all_riddles, riddle_count)
         self.assertEqual(riddle["question"], "What has a head, a tail, is brown, and has no legs?")
         self.assertEqual(riddle["answer"], "penny")
+        
+    def test_reset_game(self):
+        """
+        Ensure all game variables have been reset
+        """
+        riddle_count = run.riddle_count
+        run.reset_game()
+        self.assertEqual(riddle_count, 1)

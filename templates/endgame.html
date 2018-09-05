@@ -1,0 +1,22 @@
+<!--This file uses base.html as a template and all additional content should go between the block and end content tags below-->
+{% extends 'base.html' %} {% block content %}
+<div class="text-centered">
+    <h4>Well done USERNAME!</h4>
+    <p>You scored {{ score }} out of 20!</p>
+    <p>Do you want to play again?</p>
+    <form class="text-centered" method="POST">
+        <div class="form-group">
+            <button type="submit" class="btn btn-success">Play Again!</button>
+        </div>
+    </form>
+</div>
+
+<hr class="featurette-divider">
+
+<aside class="text-centered">
+    <!--High score table to go here-->
+    <h4>High Scores</h4>
+    <table>
+    </table>
+</aside>
+{% endblock %}
