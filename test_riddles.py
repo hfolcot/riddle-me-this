@@ -27,6 +27,10 @@ class TestRiddles(unittest.TestCase):
         """
         Ensure all game variables have been reset
         """
-        riddle_count = run.riddle_count
-        run.reset_game()
+        #currently fails as apparently unable to reach the all_users dict
+        current_user = "argaer"
+        riddle_count = run.all_users[current_user]["current_riddle"]
+        score = run.all_users[current_user]["score"]
+        run.reset_game(current_user)
         self.assertEqual(riddle_count, 1)
+        self.assertEqual(score, 0)
