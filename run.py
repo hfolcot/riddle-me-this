@@ -21,11 +21,17 @@ def get_all_riddles(riddle_file):
     return all_riddles
     
 def get_next_riddle(riddles, riddle_count):
+    """
+    Selects an entry from the nested dictionary and returns it as a riddle with a question and answer
+    """
     count = str(riddle_count)
     riddle = riddles[count]
     return riddle
     
 def reset_game():
+    """
+    Resets the game so the user can begin again
+    """
     global riddle_count
     riddle_count = 1
     return riddle_count
@@ -34,7 +40,8 @@ def reset_game():
 #Welcome page containing username entry, instructions and current high scores
 def index():
     error = ""
-    # Handle POST request
+    # Handle POST request: ensures that username is unique and if so it is entered into the users.txt file
+    # If not unique an error is shown on the page and the user must try again
     if request.method == "POST":
         usernames = open("data/users.txt").read()
         if request.form["username"] in usernames:
@@ -43,40 +50,41 @@ def index():
         else:
             with open("data/users.txt", "a") as f:
                 f.writelines(request.form["username"] + "\n")
-                return redirect('/game')
+                return redirect(request.form["username"] + '/game')
     return render_template("index.html")
 
         
     
-@app.route("/game", methods=["GET", "POST"])
+@app.route("/<username>/game", methods=["GET", "POST"])
 #The page where the game will be played
-def game():
+def game(username):
     global riddle_count
     if riddle_count > 3:
-        return redirect("/endgame")
-    all_riddles = get_all_riddles("data/riddles.json")
-    riddle = get_next_riddle(all_riddles, riddle_count)
+        return redirect(username + "/endgame")
+    all_riddles = get_all_riddles("data/riddles.json") #Creates a nested dict containing all riddles
+    riddle = get_next_riddle(all_riddles, riddle_count) #Selects the current riddle based on the count so far
     question = riddle["question"]
     answer = riddle["answer"]
     # Handle POST request
     if request.method == "POST":
-        if request.form["answer"] == answer:
+        useranswer = request.form["answer"]
+        if useranswer.lower() == answer:
             riddle_count += 1
-            return redirect("/game")
+            return redirect(username + "/game")
         else:
-            error = "Incorrect"
+            error = useranswer
             return render_template("game.html", question=question, error=error)
 
 
     return render_template("game.html", question=question)
     
-@app.route("/endgame", methods=["GET", "POST"])
+@app.route("/<username>/endgame", methods=["GET", "POST"])
 #See the high scores and get a chance to play again
-def endgame():
+def endgame(username):
     # Handle POST request
     if request.method == "POST":
         reset_game()
-        return redirect("/game")
+        return redirect(username + "/game")
     return render_template("endgame.html")
 
 
