@@ -16,7 +16,21 @@
 <aside class="text-centered">
     <!--High score table to go here-->
     <h4>High Scores</h4>
-    <table>
+    <table class="table table-dark">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Date</th>
+                <th>Score</th>
+            </tr>
+        </thead>
+        {% for key in ordered_scores %}
+            <tr>
+                <td>{{ key }}</td>
+                    <td>{{ all_scores[key]["date"] }}</td>
+                    <td>{{ all_scores[key]["score"] }}</td>
+            </tr>
+        {% endfor %}
     </table>
 </aside>
 {% endblock %}

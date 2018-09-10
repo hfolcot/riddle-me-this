@@ -1,4 +1,4 @@
-import os, json, random
+import os, json, random, datetime
 from flask import Flask, redirect, render_template, request, session
 
 app = Flask(__name__)
@@ -9,18 +9,35 @@ Global Variables
 """
 riddle_count = 1
 all_users = {}
+all_current_scores = {"Player 1": {"date": "2018-09-10", "score": 0}} #Sample entry
 
 """
 Main Game functions
 """
-
-def get_all_riddles(riddle_file):
+def get_data(file):
     """
-    Load the riddles from the JSON file
+    Load the required data (riddles/scores) from a json file
     """
-    with open(riddle_file, "r") as f:
-        all_riddles = json.load(f)
-    return all_riddles
+    with open(file, "r") as f:
+        data = json.load(f)
+    return data
+    
+def order_high_scores(data):
+    """
+    Order the scores by largest to smallest and make the top ten available for the high scores table
+    """
+    
+    ordered_scores = sorted(data, key=lambda x: (data[x]["score"], data[x]["date"]), reverse=True)
+    return ordered_scores[:10]
+    
+def add_to_scores(file, user, score):
+    """
+    Add the current user's score to the scores.json file
+    """
+    now = str(datetime.date.today())
+    all_current_scores[user]= {"score" : score, "date" : now} #Adds a new entry to the all_current_scores dict
+    with open("data/scores.json", "w") as f:
+        json.dump(all_current_scores, f)
     
 def get_next_riddle(riddles, riddle_count):
     """
@@ -36,7 +53,6 @@ def reset_game(username):
     """
     all_users[username]["current_riddle"] = 1
     all_users[username]["score"] = 0
-    print(all_users)
     return all_users[username]["current_riddle"]
 
 @app.route("/", methods=["GET", "POST"])
@@ -58,7 +74,9 @@ def index():
                 all_users[current_user] = {"name": current_user, "score": 0, "current_riddle": 1, "incorrect_answers": {}}
                 print(all_users)
                 return redirect(request.form["username"] + '/game')
-    return render_template("index.html")
+    all_scores = get_data("data/scores.json")
+    ordered_scores = order_high_scores(all_scores)
+    return render_template("index.html", all_scores=all_scores, ordered_scores=ordered_scores)
 
         
     
@@ -70,8 +88,9 @@ def game(username):
         username = session['username']
         #Check to ensure there are still riddles left to show, ends the game if not
         if all_users[username]["current_riddle"] > 3:
+            add_to_scores("data/scores.json", username, all_users[username]["score"])
             return redirect(username + "/endgame")
-        all_riddles = get_all_riddles("data/riddles.json") #Creates a nested dict containing all riddles
+        all_riddles = get_data("data/riddles.json") #Creates a nested dict containing all riddles
         riddle = get_next_riddle(all_riddles, all_users[username]["current_riddle"]) #Selects the current riddle based on the count so far
         question = riddle["question"]
         answer = riddle["answer"]
@@ -97,11 +116,14 @@ def game(username):
 #See the user score/high scores and get a chance to play again
 def endgame(username):
     score = all_users[username]["score"]
+    
     # Handle POST request
     if request.method == "POST":
         reset_game(username)
         return redirect(username + "/game")
-    return render_template("endgame.html", score=score, username=username)
+    all_scores = get_data("data/scores.json")
+    ordered_scores = order_high_scores(all_scores)
+    return render_template("endgame.html", score=score, username=username, all_scores=all_scores, ordered_scores=ordered_scores)
 
 
 if __name__ == '__main__':       
