@@ -4,12 +4,20 @@ from flask import Flask, redirect, render_template, request, session
 app = Flask(__name__)
 app.secret_key = "check out how random my string is" #Secret key is required for session
 
+
+
+
 """
 Global Variables
 """
 riddle_count = 1
 all_users = {}
-all_current_scores = {"Player 1": {"date": "2018-09-10", "score": 0}} #Sample entry
+all_current_scores = {"Player 1": 
+                        {"date": "2018-09-10", "score": 0}
+                    } #Sample entry
+
+
+
 
 """
 Main Game functions
@@ -42,7 +50,7 @@ def create_new_user(username):
     with open("data/users.txt", "a") as f:
         current_user = username
         f.writelines(current_user + "\n")
-        all_users[current_user] = {"name": current_user, "score": 0, "current_riddle": 1, "incorrect_answers": {}}
+        all_users[current_user] = {"name": current_user, "score": 0, "current_riddle": 1, "incorrect_answers": []}
         return all_users
     
 def get_next_riddle(riddles, riddle_count):
@@ -60,6 +68,12 @@ def reset_game(username):
     all_users[username]["current_riddle"] = 1
     all_users[username]["score"] = 0
     return all_users[username]["current_riddle"]
+
+
+    
+"""
+Pages
+"""
 
 @app.route("/", methods=["GET", "POST"])
 #Welcome page containing username entry, instructions and current high scores
@@ -99,20 +113,26 @@ def game(username):
         # Handle POST request
         if request.method == "POST":
             #check the answer is correct and if so redirect to the next question
-            useranswer = request.form["answer"]
-            if useranswer.lower() == answer:
+            if request.form["action"] == "go":
+                useranswer = request.form["answer"]
+                if useranswer.lower() == answer:
+                    all_users[username]["current_riddle"] += 1
+                    all_users[username]["score"] += 1
+                    all_users[username]["incorrect_answers"] = []
+                    return redirect(username + "/game")
+                #if incorrect the answer is printed below the answer box
+                else:
+                    all_users[username]["incorrect_answers"].append(useranswer)
+                    return render_template("game.html", question=question, error=all_users[username]["incorrect_answers"])
+            #if player opts to skip the question the next riddle will be shown but no points will be given
+            elif request.form["action"] == "skip":
                 all_users[username]["current_riddle"] += 1
-                all_users[username]["score"] += 1
-                print(all_users[username])
+                all_users[username]["incorrect_answers"] = []
                 return redirect(username + "/game")
-            #if incorrect the answer is printed below the answer box
-            else:
-                error = useranswer
-                return render_template("game.html", question=question, error=error)
     else:
         return redirect("/")
 
-    return render_template("game.html", question=question)
+    return render_template("game.html", question=question, username=username)
     
 @app.route("/<username>/endgame", methods=["GET", "POST"])
 #See the user score/high scores and get a chance to play again
@@ -121,12 +141,20 @@ def endgame(username):
     
     # Handle POST request
     if request.method == "POST":
-        reset_game(username)
-        return redirect(username + "/game")
+        if request.form["action"] == "replay":
+            reset_game(username)
+            return redirect(username + "/game")
+        elif request.form["action"] == "end":
+            #Logs out the current user and returns to index
+            reset_game(username)
+            session.pop(username, None)
+            return redirect("/")
     all_scores = get_data("data/scores.json")
     ordered_scores = order_high_scores(all_scores)
     return render_template("endgame.html", score=score, username=username, all_scores=all_scores, ordered_scores=ordered_scores)
 
 
+
+#Use the IF statement below to prevent the file from executing fully when imported by other modules
 if __name__ == '__main__':       
     app.run(host=os.getenv("IP"), port=int(os.getenv("PORT")), debug=True)

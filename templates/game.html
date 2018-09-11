@@ -1,6 +1,8 @@
 <!--This file uses base.html as a template and all additional content should go between the block and end content tags below-->
 {% extends 'base.html' %} {% block content %}
+
 <div class="question text-centered">
+    <h4>Good luck {{ username }}!</h4>
     <p>{{ question }}</p>
 </div>
 
@@ -8,12 +10,17 @@
     <div class="form-group">
         <label for="answer">Answer:</label>
         <input type="text" id="answer" name="answer"></input><br>
-        <button type="submit" class="btn btn-success">Go!</button>
+        <button type="submit" name="action" value="go" class="btn btn-success">Go!</button>
+        <button type="submit" name="action" value="skip" class="btn btn-success">Skip this question ></button>
     </div>
 </form>
-<div>
+<hr class="featurette-divider">
+<div class="col-xs-6 md-offset-3 incorrect-answers text-centered">
+    <h4>Incorrect Guesses:</h4>
     {% if error %}
+        {% for error in error %}
     <p>{{ error }}</p>
+        {% endfor %}
     {% endif %}
 </div>
 {% endblock %}

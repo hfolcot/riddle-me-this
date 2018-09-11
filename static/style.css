@@ -4,9 +4,12 @@ body {
     background-size: 100%;
 }
 
+.quizbg {
+    background-image: url("qmarkbg.png");    
+}
+
 .header {
     display: flex;
-    background-image: url("qmarkbg.png");
     opacity: 0.75;
     height: 15vh;
 }
@@ -25,7 +28,6 @@ body {
 
 .footer {
     display: flex;
-    background-image: url("qmarkbg.png");
     opacity: 0.75;
 }
 
@@ -40,4 +42,8 @@ body {
     
 .error {
     color: red;
+}
+
+.incorrect-answers {
+    
 }
