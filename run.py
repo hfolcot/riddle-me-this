@@ -26,7 +26,6 @@ def order_high_scores(data):
     """
     Order the scores by largest to smallest and make the top ten available for the high scores table
     """
-    
     ordered_scores = sorted(data, key=lambda x: (data[x]["score"], data[x]["date"]), reverse=True)
     return ordered_scores[:10]
     
@@ -38,6 +37,13 @@ def add_to_scores(file, user, score):
     all_current_scores[user]= {"score" : score, "date" : now} #Adds a new entry to the all_current_scores dict
     with open("data/scores.json", "w") as f:
         json.dump(all_current_scores, f)
+        
+def create_new_user(username):
+    with open("data/users.txt", "a") as f:
+        current_user = username
+        f.writelines(current_user + "\n")
+        all_users[current_user] = {"name": current_user, "score": 0, "current_riddle": 1, "incorrect_answers": {}}
+        return all_users
     
 def get_next_riddle(riddles, riddle_count):
     """
@@ -68,12 +74,8 @@ def index():
             return render_template("index.html", error=error)
         else:
             session['username'] = request.form['username']
-            with open("data/users.txt", "a") as f:
-                current_user = request.form["username"]
-                f.writelines(current_user + "\n")
-                all_users[current_user] = {"name": current_user, "score": 0, "current_riddle": 1, "incorrect_answers": {}}
-                print(all_users)
-                return redirect(request.form["username"] + '/game')
+            create_new_user(request.form["username"])
+            return redirect(request.form["username"] + '/game')
     all_scores = get_data("data/scores.json")
     ordered_scores = order_high_scores(all_scores)
     return render_template("index.html", all_scores=all_scores, ordered_scores=ordered_scores)
