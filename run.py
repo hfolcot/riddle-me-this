@@ -78,20 +78,20 @@ Pages
 @app.route("/", methods=["GET", "POST"])
 #Welcome page containing username entry, instructions and current high scores
 def index():
+    all_scores = get_data("data/scores.json")
+    ordered_scores = order_high_scores(all_scores)
     error = ""
     # Handle POST request: ensures that username is unique and if so it is entered into the users.txt file
     # If not unique an error is shown on the page and the user must try again
     if request.method == "POST":
-        usernames = open("data/users.txt").read()
+        usernames = [open("data/users.txt").readlines()]
         if request.form["username"] in usernames:
-            error = "This username has already been taken"
-            return render_template("index.html", error=error)
+            error = "That username has already been taken."
+            return render_template("index.html", error=error, all_scores=all_scores, ordered_scores=ordered_scores)
         else:
             session['username'] = request.form['username']
             create_new_user(request.form["username"])
             return redirect(request.form["username"] + '/game')
-    all_scores = get_data("data/scores.json")
-    ordered_scores = order_high_scores(all_scores)
     return render_template("index.html", all_scores=all_scores, ordered_scores=ordered_scores)
 
         
@@ -103,7 +103,7 @@ def game(username):
     if 'username' in session:
         username = session['username']
         #Check to ensure there are still riddles left to show, ends the game if not
-        if all_users[username]["current_riddle"] > 3:
+        if all_users[username]["current_riddle"] > 20:
             add_to_scores("data/scores.json", username, all_users[username]["score"])
             return redirect(username + "/endgame")
         all_riddles = get_data("data/riddles.json") #Creates a nested dict containing all riddles

@@ -86,7 +86,7 @@ correctly at all screen sizes and on all devices available within the Tools func
 On testing I have noted the following issues:
 * On using the username "test" and then trying to play again with the username "t",
 I received an error saying the username had already been taken. This is caused by the if
-statement checking to see if the name is in the list.
+statement checking to see if the name is in the list. **_Now fixed. The issue was caused by using read instead of readlines when opening the text file._**
 * **Try clicking Go without entering an answer** - This will result in the page refreshing
 and the username disappearing from the 'Good Luck (username)!' message.
 * The high score table is rendering partially underneath the footer on mobile screens.
