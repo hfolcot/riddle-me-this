@@ -75,6 +75,7 @@ in order to see who is good at lateral thinking.**
 2. Game page
     * Try clicking Go without entering an answer
     * Click on the Skip Question button and ensure the next question is displayed.
+    * Enter an answer and then click the Skip Question button
     * Enter an incorrect answer and click Go.
 3. End page
     * Click on Play Again
@@ -82,6 +83,10 @@ in order to see who is good at lateral thinking.**
 
 Google Chrome's developer tools have been used to test that the screen is displaying 
 correctly at all screen sizes and on all devices available within the Tools function.
+
+The HTML and CSS have been tested at the W3.org validators with no issues reported.
+
+The game has been tested in Safari, Chrome, Firefox, MS Edge and Opera with no issues.
 
 On testing I have noted the following issues:
 * On using the username "test" and then trying to play again with the username "t",
