@@ -2,16 +2,17 @@
 {% extends 'base.html' %} {% block content %}
 
 <div class="question text-centered">
-    <h4>Good luck {{ username }}!</h4>
-    <p>{{ question }}</p>
+    <h4 class="welcome">Good luck {{ username }}!</h4>
+    <h5 class="question-no">Question {{ qnumber }}</h5>
+    <p>{{ question|safe }}</p>
 </div>
 
 <form class="text-centered" method="POST">
     <div class="form-group">
         <label for="answer">Answer:</label>
-        <input type="text" id="answer" name="answer"></input><br>
-        <button type="submit" name="action" value="go" class="btn btn-success">Go!</button>
-        <button type="submit" name="action" value="skip" class="btn btn-success">Skip this question ></button>
+        <input type="text" id="answer" name="answer">
+        <button type="submit" name="action" value="go" class="btn btn-primary">Go!</button><br>
+        <button type="submit" name="action" value="skip" class="btn btn-light">Skip this question ></button>
     </div>
 </form>
 <hr class="featurette-divider">

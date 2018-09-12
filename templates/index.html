@@ -1,36 +1,40 @@
 <!--This file uses base.html as a template and all additional content should go between the block and end content tags below-->
 {% extends 'base.html' %} {% block content %}
 
-<h3 class="text-centered">Welcome</h3>
+<h3 class="text-centered welcome">Welcome!</h3>
 
 <form class="text-centered" method="POST">
     <!--Input form for username-->
     <div class="form-group">
-        <label for="username">Please enter a username:</label>
-        <input type="text" id="username" name="username" required></input><br>
-        <button type="submit" class="btn btn-success">Play</button>
+        <label for="username"><strong>Please enter a username:</strong></label>
+        <input type="text" id="username" name="username" required><br>
+        <button type="submit" class="btn btn-primary play-btn">Play</button>
     </div>
     <div>
         {% if error %}
-        <p class="error"><strong>Error: {{ error }}</strong></p>
+        <p class="error"><strong>{{ error }}</strong></p>
         {% endif %}
     </div>
 </form>
-
-<hr class="featurette-divider">
 
 <section class="container">
     <!--Game Instructions-->
     <div class="row">
         <div class="col-xs-6 instructions">
-            <p>Welcome to Riddle me THIS! You are about to be asked twenty lateral thinking questions. You have as many chances as you like to answer each question with a one-word answer. Enter your username above and click Play to continue.</p>
+            <p>Welcome to Riddle me THIS!</p>
+            <ul>
+                <li>You are about to be asked twenty lateral thinking questions.</li>
+                <li>All the questions have a single word answer.</li>
+                <li>You have as many chances as you like to answer each question.</li>
+                <li>Enter your username above and click Play to continue.</li>
+            </ul> 
         </div>
     </div>
 </section>
 
 <hr class="featurette-divider">
 
-<aside class="text-centered">
+<aside class="text-centered high-scores">
     <!--High score table to go here-->
     <h4>High Scores</h4>
     <table class="table table-dark">
