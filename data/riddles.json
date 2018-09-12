@@ -18,7 +18,7 @@
         {"question": "What is black when you buy it, red when you use it, and gray when you throw it away?", 
         "answer": "charcoal"}, 
     "7": 
-        {"question": "Tall I am young, Short I am old, \nWhile with life I glow, Wind is my foe. \nWhat am I?", 
+        {"question": "Tall I am young, \nShort I am old, \nWhile with life I glow, \nWind is my foe. \nWhat am I?", 
         "answer": "candle"}, 
     "8": 
         {"question": "I am not alive, but I grow; \nI don't have lungs, but I need air; \nI don't have a mouth, but water kills me. \nWhat am I?", 
@@ -27,13 +27,13 @@
         {"question": "If you have me, you want to share me. \nIf you share me, you haven't got me. \nWhat am I?", 
         "answer": "secret"}, 
     "10": 
-        {"question": "What always runs but never walks, often murmurs, never talks, has a bed but never sleeps, has a mouth but never eats?", 
+        {"question": "What always runs but never walks, \nOften murmurs, never talks, \nHas a bed but never sleeps, \nHas a mouth but never eats?", 
         "answer": "river"}, 
     "11": 
-        {"question": "I am a word of six; my first three letters refer to an automobile; my last three letters refer to a household animal; my first four letters is a fish; my whole is found in your room. \nWhat am I?", 
+        {"question": "I am a word of six; \nMy first three letters refer to an automobile; \nMy last three letters refer to a household animal; \nMy first four letters is a fish; \nMy whole is found in your room. \nWhat am I?", 
         "answer": "carpet"}, 
     "12": 
-        {"question": "Which of the following statements is correct?\n1. Only one of the statements is false 2. Exactly two of the statements are false. 3. Only three of the statements are false. 4. Exactly four of the statements are false. 5. All five of these statements are false.", 
+        {"question": "Which of the following statements is correct?\n1. Only one of the statements is false \n2. Exactly two of the statements are false. \n3. Only three of the statements are false. \n4. Exactly four of the statements are false. \n5. All five of these statements are false.", 
         "answer": "4"}, 
     "13": 
         {"question": "My age today is three times what it will be three years from now minus three times what my age was three years ago. \nHow old am I?", 
@@ -45,16 +45,16 @@
         {"question": "What goes up but never comes down?", 
         "answer": "age"}, 
     "16": 
-        {"question": "Always in you, Sometimes on you, If I surround you, I can kill you. What am I?", 
+        {"question": "Always in you, \nSometimes on you, \nIf I surround you, \nI can kill you. \nWhat am I?", 
         "answer": "water"}, 
     "17": 
-        {"question": "I have lakes but no water, no cars but I have streets, many places and borders, but I'm in one piece. \nWhat am I?",
+        {"question": "I have lakes but no water, \nNo cars but I have streets, \nMany places and borders, \nBut I'm in one piece. \nWhat am I?",
         "answer": "map"}, 
     "18": 
         {"question": "I make two people out of one.  \nWhat am I?", 
         "answer": "mirror"}, 
     "19": 
-        {"question": "Until I am measured I am not known, Yet how you miss me when I have flown.  \nWhat am I?", 
+        {"question": "Until I am measured I am not known, \nYet how you miss me when I have flown.  \nWhat am I?", 
         "answer": "time"}, 
     "20": 
         {"question": "Only one color, but not one size. \nStuck at the bottom, yet easily flies. \nPresent in sun, but not in rain. \nDoing no harm, and feeling no pain. \nWhat is it?", 
