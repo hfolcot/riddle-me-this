@@ -123,7 +123,7 @@ def game(username):
                 #if incorrect the answer is printed below the answer box
                 else:
                     all_users[username]["incorrect_answers"].append(useranswer)
-                    return render_template("game.html", question=question, error=all_users[username]["incorrect_answers"])
+                    return render_template("game.html", question=question, error=all_users[username]["incorrect_answers"], username=username)
             #if player opts to skip the question the next riddle will be shown but no points will be given
             elif request.form["action"] == "skip":
                 all_users[username]["current_riddle"] += 1
