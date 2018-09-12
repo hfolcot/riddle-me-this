@@ -84,10 +84,12 @@ def index():
     # Handle POST request: ensures that username is unique and if so it is entered into the users.txt file
     # If not unique an error is shown on the page and the user must try again
     if request.method == "POST":
-        usernames = [open("data/users.txt").readlines()]
-        if request.form["username"] in usernames:
-            error = "That username has already been taken."
-            return render_template("index.html", error=error, all_scores=all_scores, ordered_scores=ordered_scores)
+        usernames = open("data/users.txt").readlines()
+        for item in usernames:
+            name = item.rstrip('\n')
+            if request.form["username"] == name:
+                error = "That username has already been taken."
+                return render_template("index.html", error=error, all_scores=all_scores, ordered_scores=ordered_scores)
         else:
             session['username'] = request.form['username']
             create_new_user(request.form["username"])
