@@ -108,10 +108,13 @@ def game(username):
         if all_users[username]["current_riddle"] > 20:
             add_to_scores("data/scores.json", username, all_users[username]["score"])
             return redirect(username + "/endgame")
+            
         all_riddles = get_data("data/riddles.json") #Creates a nested dict containing all riddles
         riddle = get_next_riddle(all_riddles, all_users[username]["current_riddle"]) #Selects the current riddle based on the count so far
         question = riddle["question"]
+        question = question.replace('\n','<br>')
         answer = riddle["answer"]
+        
         # Handle POST request
         if request.method == "POST":
             #check the answer is correct and if so redirect to the next question
@@ -122,10 +125,12 @@ def game(username):
                     all_users[username]["score"] += 1
                     all_users[username]["incorrect_answers"] = []
                     return redirect(username + "/game")
+                    
                 #if incorrect the answer is printed below the answer box
                 else:
                     all_users[username]["incorrect_answers"].append(useranswer)
-                    return render_template("game.html", question=question, error=all_users[username]["incorrect_answers"], username=username)
+                    return render_template("game.html", question=question, error=all_users[username]["incorrect_answers"], username=username, qnumber=all_users[username]["current_riddle"])
+                    
             #if player opts to skip the question the next riddle will be shown but no points will be given
             elif request.form["action"] == "skip":
                 all_users[username]["current_riddle"] += 1
@@ -134,7 +139,7 @@ def game(username):
     else:
         return redirect("/")
 
-    return render_template("game.html", question=question, username=username)
+    return render_template("game.html", question=question, username=username, qnumber=all_users[username]["current_riddle"])
     
 @app.route("/<username>/endgame", methods=["GET", "POST"])
 #See the user score/high scores and get a chance to play again
@@ -151,6 +156,7 @@ def endgame(username):
             reset_game(username)
             session.pop(username, None)
             return redirect("/")
+            
     all_scores = get_data("data/scores.json")
     ordered_scores = order_high_scores(all_scores)
     return render_template("endgame.html", score=score, username=username, all_scores=all_scores, ordered_scores=ordered_scores)

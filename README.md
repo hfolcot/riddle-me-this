@@ -91,6 +91,7 @@ statement checking to see if the name is in the list. **_Now fixed. The issue wa
 * **Try clicking Go without entering an answer** - This will result in the page refreshing
 and the username disappearing from the 'Good Luck (username)!' message.**_Now fixed. The issue was caused by a failure to pass the username through to the html page_**
 * The high score table is rendering partially underneath the footer on mobile screens. **_Now fixed. This issue was caused by use of height instead of min-height in css_**
+* The \n characters within the JSON file riddles.json are being ignored. **_Now fixed. A safe keyword was required in the html and the \n characters replaced with <br>_**
 
 ## Deployment
 
