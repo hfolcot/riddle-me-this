@@ -1,29 +1,37 @@
+@import url('https://fonts.googleapis.com/css?family=BioRhyme+Expanded');
+@import url('https://fonts.googleapis.com/css?family=Raleway');
+
 body {
     background-image: url("bg.jpg");
     background-repeat: repeat;
     background-size: 100%;
+    font-family: 'Raleway', sans-serif;
 }
 
 .quizbg {
-    background-image: url("qmarkbg.png");    
+    background-image: url("qmarkbg.png");
 }
 
 .header {
     display: flex;
     opacity: 0.75;
     height: 15vh;
+    font-family: 'BioRhyme Expanded', serif;
+
 }
 
 .header h1 {
     margin: auto;
     align-self: center;
+    color: #4C5760;
+    font-size: 45px;
+    background-color: #D5DAD9;
 }
 
 .main-section {
-    height: 100vh;
+    min-height: 100vh;
     background-color: white;
     opacity: 0.75;
-    padding-top: 25px;
 }
 
 .footer {
@@ -35,15 +43,54 @@ body {
     text-align: center;
 }
 
+.welcome {
+    color: #F7C4A5;
+    padding-bottom: 25px;
+    padding-top: 25px;
+}
+
 .instructions {
     margin-left: 25%;
     margin-right: 25%;
-    }
-    
+}
+
 .error {
     color: red;
 }
 
-.incorrect-answers {
-    
+.high-scores {
+    margin-left: 15%;
+    margin-right: 15%;
+    margin-bottom: 15px;
+}
+
+.btn-primary {
+    background-color: #2F6690;
+    border-color: #2F6690;
+}
+
+.play-btn {
+    margin-bottom: 15px;
+    margin-top: 5px;
+}
+
+.btn-primary:hover,
+.btn-primary:active,
+.btn-primary:focus {
+    background-color: #678FAE;
+    border-color: #678FAE;
+    box-shadow: none;
+}
+
+@media (max-width: 767px) {
+    .header h1 {
+        font-size: 20px;
+    }
+    .header {
+        height: 10vh;
+    }
+    .instructions {
+    margin-left: 5%;
+    margin-right: 5%;
+}
 }
