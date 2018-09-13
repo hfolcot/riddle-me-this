@@ -1,4 +1,0 @@
-firefox
-opera
-msedge
-bob
