@@ -1,6 +1,6 @@
 # Riddle Me This
 
-View this project live at ...
+View this project live at https://riddle-me-this-hev.herokuapp.com/
 
 A project completed in Python and Flask.
 
@@ -102,6 +102,27 @@ and the username disappearing from the 'Good Luck (username)!' message.**_Now fi
 
 ### Heroku
 
+The project is currently deployed in Heroku.
+
+1. Download the git repository
+2. Sign up/login to Heroku.com
+3. From the dashboard click Create New App
+4. Enter a unique name and your region and click Create
+5. From your command line, enter `heroku` to ensure heroku is installed (if not installed this can be done with `sudo snap install --classic heroku`)
+6. `heroku login`
+7. Enter your credentials for heroku.com
+8. `sudo pip3 install Flask`
+9. `sudo pip3 freeze --local > requirements.txt`
+10. `echo web: python run.py > Procfile`
+11. `git add .`
+12. `git commit -m "initial deployment"`
+13. `git push -u heroku master`
+14. `heroku ps:scale web=1`
+15. From heroku.com app settings: set config vars to `IP 0.0.0.0` and `PORT 5000`
+16. Click More > Restart all Dynos
+17. App should now be live at https://your-app-name.herokuapp.com/
+
+
 
 #### Questions
 
@@ -120,6 +141,9 @@ For reference, the questions can be updated as follows:
 
 
 ## Credits
+
+### Content
+The questions in riddles.json were from https://www.riddles.com/
 
 ### Media
 
