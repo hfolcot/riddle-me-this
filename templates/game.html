@@ -1,11 +1,18 @@
 <!--This file uses base.html as a template and all additional content should go between the block and end content tags below-->
-{% extends 'base.html' %} {% block content %}
+{% extends 'base.html' %} 
+{% block content %}
+
+
+<!--Question-->
 
 <div class="question text-centered">
     <h4 class="welcome">Good luck {{ username }}!</h4>
     <h5 class="question-no">Question {{ qnumber }}</h5>
     <p>{{ question|safe }}</p>
 </div>
+
+
+<!--Answer Form-->
 
 <form class="text-centered" method="POST">
     <div class="form-group">
@@ -15,7 +22,12 @@
         <button type="submit" name="action" value="skip" class="btn btn-light">Skip this question ></button>
     </div>
 </form>
+
+
 <hr class="featurette-divider">
+
+<!--Div to hold incorrect guesses-->
+
 <div class="col-xs-6 md-offset-3 incorrect-answers text-centered">
     <h4>Incorrect Guesses:</h4>
     {% if error %}
@@ -24,4 +36,5 @@
         {% endfor %}
     {% endif %}
 </div>
+
 {% endblock %}

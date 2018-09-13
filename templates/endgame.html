@@ -1,5 +1,10 @@
 <!--This file uses base.html as a template and all additional content should go between the block and end content tags below-->
-{% extends 'base.html' %} {% block content %}
+{% extends 'base.html' %} 
+
+{% block content %}
+
+<!--Play Again Form-->
+
 <div class="text-centered">
     <h4 class="welcome">Well done {{ username }}!</h4>
     <p>You scored {{ score }} out of 20!</p>
@@ -12,10 +17,13 @@
     </form>
 </div>
 
+
 <hr class="featurette-divider">
 
+
+<!--High score table-->
+
 <aside class="text-centered high-scores">
-    <!--High score table to go here-->
     <h4>High Scores</h4>
     <table class="table table-dark">
         <thead>
@@ -34,4 +42,5 @@
         {% endfor %}
     </table>
 </aside>
+
 {% endblock %}

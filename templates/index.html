@@ -1,7 +1,10 @@
 <!--This file uses base.html as a template and all additional content should go between the block and end content tags below-->
-{% extends 'base.html' %} {% block content %}
+{% extends 'base.html' %} 
+{% block content %}
 
 <h3 class="text-centered welcome">Welcome!</h3>
+
+<!--Username form-->
 
 <form class="text-centered" method="POST">
     <!--Input form for username-->
@@ -10,6 +13,7 @@
         <input type="text" id="username" name="username" required><br>
         <button type="submit" class="btn btn-primary play-btn">Play</button>
     </div>
+    <!--Errors will go here-->
     <div>
         {% if error %}
         <p class="error"><strong>{{ error }}</strong></p>
@@ -17,8 +21,10 @@
     </div>
 </form>
 
+
+<!--Game Instructions-->
+
 <section class="container">
-    <!--Game Instructions-->
     <div class="row">
         <div class="col-xs-6 instructions">
             <p>Welcome to Riddle me THIS!</p>
@@ -32,10 +38,12 @@
     </div>
 </section>
 
+
 <hr class="featurette-divider">
 
+
+<!--High Score Table-->
 <aside class="text-centered high-scores">
-    <!--High score table to go here-->
     <h4>High Scores</h4>
     <table class="table table-dark">
         <thead>

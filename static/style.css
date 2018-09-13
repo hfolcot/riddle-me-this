@@ -1,5 +1,9 @@
+/****************************************************************************Fonts*/
+
 @import url('https://fonts.googleapis.com/css?family=BioRhyme+Expanded');
 @import url('https://fonts.googleapis.com/css?family=Raleway');
+
+/*****************************************Main*/
 
 body {
     background-image: url("bg.jpg");
@@ -8,7 +12,7 @@ body {
     font-family: 'Raleway', sans-serif;
 }
 
-.quizbg {
+.quizbg { /*Applied to both header and footer in HTML*/
     background-image: url("qmarkbg.png");
 }
 
@@ -17,7 +21,6 @@ body {
     opacity: 0.75;
     height: 15vh;
     font-family: 'BioRhyme Expanded', serif;
-
 }
 
 .header h1 {
@@ -35,7 +38,6 @@ body {
 }
 
 .footer {
-    display: flex;
     opacity: 0.75;
 }
 
@@ -43,6 +45,7 @@ body {
     text-align: center;
 }
 
+/***************************************Home Page*/
 .welcome {
     color: #F7C4A5;
     padding-bottom: 25px;
@@ -58,12 +61,16 @@ body {
     color: red;
 }
 
+/****************************************High Scores*/
+
 .high-scores {
     margin-left: 15%;
     margin-right: 15%;
     margin-bottom: 15px;
 }
 
+
+/****************************************Buttons*/
 .btn-primary {
     background-color: #2F6690;
     border-color: #2F6690;
@@ -81,6 +88,8 @@ body {
     border-color: #678FAE;
     box-shadow: none;
 }
+
+/***********************************Media Queries*/
 
 @media (max-width: 767px) {
     .header h1 {
