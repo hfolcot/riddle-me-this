@@ -7,6 +7,13 @@
 
 <div class="question text-centered">
     <h4 class="welcome">Good luck {{ username }}!</h4>
+    {% if correct=="yes" and qnumber > 1 %}
+    <p class="info">Correct, you have {{ score }} points!</p>
+    {% elif correct=="no" and qnumber > 1 %}
+    <p class="info">Bad luck, try again!<br>Your score: {{ score }}</p>
+    {% elif correct=="skip" and qnumber > 1 %}
+    <p class="info">Question skipped.<br>Your score: {{ score }}</p>
+    {% endif %}
     <h5 class="question-no">Question {{ qnumber }}</h5>
     <p>{{ question|safe }}</p>
 </div>

@@ -48,7 +48,7 @@ def create_new_user(username):
     with open("data/users.txt", "a") as f:
         current_user = username
         f.writelines(current_user + "\n")
-        all_users[current_user] = {"name": current_user, "score": 0, "current_riddle": 1, "incorrect_answers": []}
+        all_users[current_user] = {"name": current_user, "score": 0, "current_riddle": 1, "incorrect_answers": [], "correct": "yes"}
         return all_users
     
 def get_next_riddle(riddles, riddle_count):
@@ -102,6 +102,7 @@ def game(username):
     #Check to ensure user has entered their name, if not they are redirected back to index
     if 'username' in session:
         username = session['username']
+        
         #Check to ensure there are still riddles left to show, ends the game if not
         if all_users[username]["current_riddle"] > 20:
             add_to_scores("data/scores.json", username, all_users[username]["score"])
@@ -122,22 +123,25 @@ def game(username):
                     all_users[username]["current_riddle"] += 1
                     all_users[username]["score"] += 1
                     all_users[username]["incorrect_answers"] = []
+                    all_users[username]["correct"] = "yes"
                     return redirect(username + "/game")
                     
                 #if incorrect the answer is printed below the answer box
                 else:
                     all_users[username]["incorrect_answers"].append(useranswer)
-                    return render_template("game.html", question=question, error=all_users[username]["incorrect_answers"], username=username, qnumber=all_users[username]["current_riddle"])
+                    all_users[username]["correct"]="no"
+                    return render_template("game.html", question=question, error=all_users[username]["incorrect_answers"], username=username, qnumber=all_users[username]["current_riddle"], correct=all_users[username]["correct"], score=all_users[username]["score"])
                     
             #if player opts to skip the question the next riddle will be shown but no points will be given
             elif request.form["action"] == "skip":
                 all_users[username]["current_riddle"] += 1
                 all_users[username]["incorrect_answers"] = []
+                all_users[username]["correct"]="skip"
                 return redirect(username + "/game")
     else:
         return redirect("/")
 
-    return render_template("game.html", question=question, username=username, qnumber=all_users[username]["current_riddle"])
+    return render_template("game.html", question=question, username=username, qnumber=all_users[username]["current_riddle"], correct=all_users[username]["correct"], score=all_users[username]["score"])
     
 @app.route("/<username>/endgame", methods=["GET", "POST"])
 #See the user score/high scores and get a chance to play again
@@ -163,4 +167,4 @@ def endgame(username):
 
 #Use the IF statement below to prevent the file from executing fully when imported by other modules
 if __name__ == '__main__':       
-    app.run(host=os.getenv("IP"), port=int(os.getenv("PORT")), debug=False)
+    app.run(host=os.getenv("IP"), port=int(os.getenv("PORT")), debug=True)
