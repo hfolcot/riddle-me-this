@@ -138,6 +138,11 @@ def game(username):
                 all_users[username]["incorrect_answers"] = []
                 all_users[username]["correct"]="skip"
                 return redirect(username + "/game")
+            elif request.form["action"] == "logout":
+                #Logs out the current user and returns to index
+                reset_game(username)
+                session.pop(username, None)
+                return redirect("/")
     else:
         return redirect("/")
 

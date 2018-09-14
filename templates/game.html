@@ -1,6 +1,5 @@
 <!--This file uses base.html as a template and all additional content should go between the block and end content tags below-->
-{% extends 'base.html' %} 
-{% block content %}
+{% extends 'base.html' %} {% block content %}
 
 
 <!--Question-->
@@ -26,22 +25,26 @@
         <label for="answer">Answer:</label>
         <input type="text" id="answer" name="answer">
         <button type="submit" name="action" value="go" class="btn btn-primary">Go!</button><br>
-        <button type="submit" name="action" value="skip" class="btn btn-light">Skip this question ></button>
+        <button type="submit" name="action" value="skip" class="btn btn-light">Skip this question ></button><br>
+
     </div>
 </form>
 
 
 <hr class="featurette-divider">
+<form method="POST">
+    <div class="form-group text-right">
+        <button type="submit" name="action" value="logout" class="btn btn-light logout"><i class="fas fa-sign-out-alt"></i>  End game</button>
+    </div>
+</form>
 
 <!--Div to hold incorrect guesses-->
 
 <div class="col-xs-6 md-offset-3 incorrect-answers text-centered">
     <h4>Incorrect Guesses:</h4>
-    {% if error %}
-        {% for error in error %}
+    {% if error %} {% for error in error %}
     <p>{{ error }}</p>
-        {% endfor %}
-    {% endif %}
+    {% endfor %} {% endif %}
 </div>
 
 {% endblock %}

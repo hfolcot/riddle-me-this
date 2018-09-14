@@ -32,6 +32,7 @@ body {
     background-color: #D5DAD9;
 }
 
+
 .main-section {
     min-height: 100vh;
     background-color: white;
@@ -44,6 +45,10 @@ body {
 
 .text-centered {
     text-align: center;
+}
+
+.text-right {
+    text-align: right;
 }
 
 /***************************************Home Page*/
@@ -67,6 +72,13 @@ body {
 
 .info {
     font-size: 14px;
+}
+
+.logout {
+    background-color: transparent;
+    border-color: transparent;
+    font-size: 12px;
+    
 }
 
 
