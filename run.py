@@ -119,7 +119,7 @@ def game(username):
             #check the answer is correct and if so redirect to the next question
             if request.form["action"] == "go":
                 useranswer = request.form["answer"]
-                if useranswer.lower() == answer:
+                if useranswer.lower().rstrip() == answer:
                     all_users[username]["current_riddle"] += 1
                     all_users[username]["score"] += 1
                     all_users[username]["incorrect_answers"] = []
