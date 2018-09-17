@@ -45,11 +45,14 @@ class TestRiddles(unittest.TestCase):
     
     def test_high_score_created(self):
         """
-        Ensure that sample data is added to the json file
+        Ensure that sample data is added to the json file.
+        add_to_scores must include the line 
+        `return entry`
+        for this test to pass, due to the need to create a unique key at each run
         """
-        run.add_to_scores("data/scores.json", "TestingPlayer47", "12")
+        username = run.add_to_scores("data/scores.json", "TestingPlayer47", "12")
         all_scores = run.get_data("data/scores.json")
-        self.assertEqual(all_scores["TestingPlayer47"]["score"], "12")
+        self.assertEqual(all_scores[username]["score"], "12")
 
     
     def test_scores_loaded_from_file(self):
