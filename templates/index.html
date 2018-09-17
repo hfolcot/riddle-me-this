@@ -55,7 +55,7 @@
         </thead>
         {% for key in ordered_scores %}
             <tr>
-                <td>{{ key }}</td>
+                <td>{{ all_scores[key]["name"] }}</td>
                     <td>{{ all_scores[key]["date"] }}</td>
                     <td>{{ all_scores[key]["score"] }}</td>
             </tr>

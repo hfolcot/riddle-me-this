@@ -11,7 +11,7 @@ Global Variables
 riddle_count = 1
 all_users = {}
 all_current_scores = {"Player 1": 
-                        {"date": "2018-09-10", "score": 0}
+                        {"name": "Player", "date": "2018-09-10", "score": 0}
                     } #Sample entry
 
 
@@ -39,8 +39,10 @@ def add_to_scores(file, user, score):
     """
     Add the current user's score to the scores.json file
     """
-    now = str(datetime.date.today())
-    all_current_scores[user]= {"score" : score, "date" : now} #Adds a new entry to the all_current_scores dict
+    now = str(datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
+    today = str(datetime.date.today())
+    entry = user + "'" + now + "'" #allows for a unique entry in high scores dict
+    all_current_scores[entry]= {"name": user, "score" : score, "date" : today} #Adds a new entry to the all_current_scores dict
     with open("data/scores.json", "w") as f:
         json.dump(all_current_scores, f)
         
@@ -104,7 +106,7 @@ def game(username):
         username = session['username']
         
         #Check to ensure there are still riddles left to show, ends the game if not
-        if all_users[username]["current_riddle"] > 20:
+        if all_users[username]["current_riddle"] > 2:
             add_to_scores("data/scores.json", username, all_users[username]["score"])
             return redirect(username + "/endgame")
             
