@@ -100,12 +100,13 @@ def index():
 @app.route("/<username>/game", methods=["GET", "POST"])
 #The page where the game will be played
 def game(username):
-    #Check to ensure user has entered their name, if not they are redirected back to index
+    #Checks to ensure user has entered their name, if not they are redirected back to index
+    #This prevents users from trying to access the game by typing straight into the address bar
     if 'username' in session:
         username = session['username']
         
         #Check to ensure there are still riddles left to show, ends the game if not
-        if all_users[username]["current_riddle"] > 12:
+        if all_users[username]["current_riddle"] > 20:
             add_to_scores("data/scores.json", username, all_users[username]["score"])
             return redirect(username + "/endgame")
             
@@ -145,7 +146,7 @@ def game(username):
                 session.pop(username, None)
                 return redirect("/")
     else:
-        return redirect("/")
+        return redirect("/") #redirects user to index to enter their name
 
     return render_template("game.html", question=question, username=username, qnumber=all_users[username]["current_riddle"], correct=all_users[username]["correct"], score=all_users[username]["score"])
     
@@ -173,4 +174,4 @@ def endgame(username):
 
 #Use the IF statement below to prevent the file from executing fully when imported by other modules
 if __name__ == '__main__':       
-    app.run(host=os.getenv("IP"), port=int(os.getenv("PORT")), debug=True)
+    app.run(host=os.getenv("IP"), port=int(os.getenv("PORT")), debug=False)
