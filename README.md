@@ -43,7 +43,11 @@ question 1) or end the game (logs the user out and returns to the welcome page).
 
 ### Features left to implement
 
-No other features are currently planned.
+The game is currently only designed to be run on a small scale - user sessions are 
+a very basic setup using Flask sessions. No passwords are required so once the game 
+has been played and the session ended then that username will no longer be accessible.
+If using the app on a larger scale then the use of individual user accounts with 
+login/password security should be considered.
 
 ## Technologies Used
 
@@ -80,6 +84,9 @@ in order to see who is good at lateral thinking.**
 3. End page
     * Click on Play Again
     * Click on End Game
+4. General
+    * Try entering `https://riddle-me-this-hev.herokuapp.com/username/game` into the address bar
+    * Try entering `https://riddle-me-this-hev.herokuapp.com/username/game` into the address bar, after playing with specified username and then logging out
 
 Google Chrome's developer tools have been used to test that the screen is displaying 
 correctly at all screen sizes and on all devices available within the Tools function.
@@ -96,7 +103,14 @@ statement checking to see if the name is in the list. **_Now fixed. The issue wa
 * **Try clicking Go without entering an answer** - This will result in the page refreshing
 and the username disappearing from the 'Good Luck (username)!' message.**_Now fixed. The issue was caused by a failure to pass the username through to the html page_**
 * The high score table is rendering partially underneath the footer on mobile screens. **_Now fixed. This issue was caused by use of height instead of min-height in css_**
-* The \n characters within the JSON file riddles.json are being ignored. **_Now fixed. A safe keyword was required in the html and the \n characters replaced with <br>_**
+* The \n characters within the JSON file riddles.json are being ignored. **_Now fixed. A safe keyword was required in the html and the `\n` characters replaced with `<br>`_**
+* **Try entering `https://riddle-me-this-hev.herokuapp.com/username/game` after playing with specified username and then logging out** This will cause the game to resume due to the cookie for the session still being stored locally. There does not appear to be a way to resolve this without changing the method used to log in users.
+
+
+While the app was being tested by a user on an Android phone, it was found that 
+some answers were not being accepted despite being correct. It was discovered that 
+this was due to the phone's 'autospace' feature. User input is now sanitised accordingly 
+to prevent this issue occurring.
 
 ## Deployment
 
