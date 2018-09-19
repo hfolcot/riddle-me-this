@@ -104,13 +104,19 @@ statement checking to see if the name is in the list. **_Now fixed. The issue wa
 and the username disappearing from the 'Good Luck (username)!' message.**_Now fixed. The issue was caused by a failure to pass the username through to the html page_**
 * The high score table is rendering partially underneath the footer on mobile screens. **_Now fixed. This issue was caused by use of height instead of min-height in css_**
 * The \n characters within the JSON file riddles.json are being ignored. **_Now fixed. A safe keyword was required in the html and the `\n` characters replaced with `<br>`_**
-* **Try entering `https://riddle-me-this-hev.herokuapp.com/username/game` after playing with specified username and then logging out** This will cause the game to resume due to the cookie for the session still being stored locally. There does not appear to be a way to resolve this without changing the method used to log in users.
+* **Try entering `https://riddle-me-this-hev.herokuapp.com/username/game` after playing with specified username and then logging out** This will cause the game to resume due to the cookie for the session still being stored locally. There does not appear to be a way to resolve this without changing the method used to log in users. It is possible to use Flask sessions to create a timeout for idle sessions but this would not prevent the user from re-entering immediately.
 
+
+#### Feedback
 
 While the app was being tested by a user on an Android phone, it was found that 
 some answers were not being accepted despite being correct. It was discovered that 
-this was due to the phone's 'autospace' feature. User input is now sanitised accordingly 
-to prevent this issue occurring.
+this was due to the phone's 'autospace' feature. **_User input is now sanitised accordingly 
+to prevent this issue occurring._**
+
+After the game was tested by friends and family some feedback was given regarding the UI, specifically whether a question was correct or incorrect not being immediately obvious. **_Styling changes have been made to accommodate this._**
+
+An issue was also highlighted involving using characters `?=\` in the username. **_These characters are now stripped out before the username is passed to the next function or URL_**
 
 ## Deployment
 
