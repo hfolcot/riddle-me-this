@@ -7,9 +7,9 @@
 <div class="question text-centered">
     <h4 class="welcome">Good luck {{ username }}!</h4>
     {% if correct=="yes" and qnumber > 1 %}
-    <p class="info">Correct, you have {{ score }} point{% if score > 1 %}s{% endif %}!</p>
-    {% elif correct=="no" and qnumber > 1 %}
-    <p class="info">Bad luck, try again!<br>Your score: {{ score }}</p>
+    <p class="info"><span class="goodinfo">Correct!</span><br>You have {{ score }} point{% if score > 1 %}s{% endif %}!</p>
+    {% elif correct=="no" %}
+    <p class="info"><span class="badinfo">Try again!</span><br>Your score: {{ score }}</p>
     {% elif correct=="skip" and qnumber > 1 %}
     <p class="info">Question skipped.<br>Your score: {{ score }}</p>
     {% endif %}

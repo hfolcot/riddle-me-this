@@ -43,6 +43,11 @@ body {
     opacity: 0.75;
 }
 
+.ftext {
+    background-color: #D5DAD9;
+    margin-top: 5px;
+}
+
 .text-centered {
     text-align: center;
 }
@@ -72,6 +77,14 @@ body {
 
 .info {
     font-size: 14px;
+}
+
+.goodinfo {
+    background-color: #A9E190;
+}
+
+.badinfo {
+    background-color: #F2806A;
 }
 
 .logout {
