@@ -90,9 +90,17 @@ def index():
                 error = "That username has already been taken."
                 return render_template("index.html", error=error, all_scores=all_scores, ordered_scores=ordered_scores)
         else:
-            session['username'] = request.form['username']
-            create_new_user(request.form["username"])
-            return redirect(request.form["username"] + '/game')
+            username = request.form["username"]
+            
+            #Input sanitised to prevent bad characters from interfering with the URLs
+            badchars = ["\\", "/", "=", "%", "?"]
+            for i in badchars:
+                if i in username:
+                    username = username.replace(i, "")
+                    
+            session['username'] = username
+            create_new_user(username)
+            return redirect(username + '/game')
     return render_template("index.html", all_scores=all_scores, ordered_scores=ordered_scores)
 
         
@@ -174,4 +182,4 @@ def endgame(username):
 
 #Use the IF statement below to prevent the file from executing fully when imported by other modules
 if __name__ == '__main__':       
-    app.run(host=os.getenv("IP"), port=int(os.getenv("PORT")), debug=False)
+    app.run(host=os.getenv("IP"), port=int(os.getenv("PORT")), debug=True)
