@@ -96,7 +96,7 @@ def index():
             badchars = ["\\", "/", "=", "%", "?"]
             for i in badchars:
                 if i in username:
-                    username = username.replace(i, "")
+                    username = username.replace(i, "-")
                     
             session['username'] = username
             create_new_user(username)
