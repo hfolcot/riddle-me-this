@@ -93,7 +93,7 @@ def index():
             username = request.form["username"]
             
             #Input sanitised to prevent bad characters from interfering with the URLs
-            badchars = ["\\", "/", "=", "%", "?"]
+            badchars = ["\\", "/", "=", "%", "?", "#", "~", "@", ";", ":", "`", "¬", "|", "£", "$", "^", "&", "*", "(" , ")", "+"]
             for i in badchars:
                 if i in username:
                     username = username.replace(i, "-")
