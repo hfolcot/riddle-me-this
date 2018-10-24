@@ -93,9 +93,8 @@ def index():
             username = request.form["username"]
             
             #Input sanitised to prevent bad characters from interfering with the URLs
-            badchars = ["\\", "/", "=", "%", "?", "#", "~", "@", ";", ":", "`", "¬", "|", "£", "$", "^", "&", "*", "(" , ")", "+"]
-            for i in badchars:
-                if i in username:
+            for i in username:
+                if not i.isalnum():
                     username = username.replace(i, "-")
                     
             session['username'] = username
@@ -121,7 +120,6 @@ def game(username):
         all_riddles = get_data("data/riddles.json") #Creates a nested dict containing all riddles
         riddle = get_next_riddle(all_riddles, all_users[username]["current_riddle"]) #Selects the current riddle based on the count so far
         question = riddle["question"]
-        question = question.replace('\n','<br>')
         answer = riddle["answer"]
         
         # Handle POST request
@@ -182,4 +180,4 @@ def endgame(username):
 
 #Use the IF statement below to prevent the file from executing fully when imported by other modules
 if __name__ == '__main__':       
-    app.run(host=os.getenv("IP"), port=int(os.getenv("PORT")), debug=False)
+    app.run(host=os.getenv("IP"), port=int(os.getenv("PORT")), debug=True)
