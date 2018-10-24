@@ -180,4 +180,4 @@ def endgame(username):
 
 #Use the IF statement below to prevent the file from executing fully when imported by other modules
 if __name__ == '__main__':       
-    app.run(host=os.getenv("IP"), port=int(os.getenv("PORT")), debug=True)
+    app.run(host=os.getenv("IP"), port=int(os.getenv("PORT")), debug=False)
