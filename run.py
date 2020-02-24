@@ -107,15 +107,15 @@ def index():
 @app.route("/<username>/game", methods=["GET", "POST"])
 #The page where the game will be played
 def game(username):
+    print("back to here")
     #Checks to ensure user has entered their name, if not they are redirected back to index
     #This prevents users from trying to access the game by typing straight into the address bar
     if 'username' in session:
         username = session['username']
-        
         #Check to ensure there are still riddles left to show, ends the game if not
         if all_users[username]["current_riddle"] > 20:
             add_to_scores("data/scores.json", username, all_users[username]["score"])
-            return redirect(username + "/endgame")
+            return redirect("/" + username + "/endgame")
             
         all_riddles = get_data("data/riddles.json") #Creates a nested dict containing all riddles
         riddle = get_next_riddle(all_riddles, all_users[username]["current_riddle"]) #Selects the current riddle based on the count so far
@@ -126,13 +126,16 @@ def game(username):
         if request.method == "POST":
             #check the answer is correct and if so redirect to the next question
             if request.form["action"] == "go":
+                print("GO!")
                 useranswer = request.form["answer"]
+                print(useranswer)
                 if useranswer.lower().rstrip() == answer:
+                    print("correct")
                     all_users[username]["current_riddle"] += 1
                     all_users[username]["score"] += 1
                     all_users[username]["incorrect_answers"] = []
                     all_users[username]["correct"] = "yes"
-                    return redirect(username + "/game")
+                    return redirect("/" + username + "/game")
                     
                 #if incorrect the answer is printed below the answer box
                 else:
@@ -145,7 +148,7 @@ def game(username):
                 all_users[username]["current_riddle"] += 1
                 all_users[username]["incorrect_answers"] = []
                 all_users[username]["correct"]="skip"
-                return redirect(username + "/game")
+                return redirect("/" + username + "/game")
             elif request.form["action"] == "logout":
                 #Logs out the current user and returns to index
                 reset_game(username)
@@ -165,7 +168,7 @@ def endgame(username):
     if request.method == "POST":
         if request.form["action"] == "replay":
             reset_game(username)
-            return redirect(username + "/game")
+            return redirect("/" + username + "/game")
         elif request.form["action"] == "end":
             #Logs out the current user and returns to index
             reset_game(username)
